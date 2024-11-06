@@ -1,4 +1,8 @@
 <?php 
+require("../model/database.php");
+require("../model/theloai.php");
+
+$TheLoai = new THELOAI();
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -8,9 +12,11 @@ else{
 
 
 switch($action){
-    case "null": 	
+    case "null":
+        $tl = $TheLoai->laytheloai(); 	
         include("main.php");
         break;
     }
+
 ?>
 

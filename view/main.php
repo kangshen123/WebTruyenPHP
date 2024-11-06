@@ -45,9 +45,9 @@
     <?php include("include/top.php")?>
     <div class="nav-scroller py-1 mb-2">
 			<nav class="nav d-flex justify-content-between">
-            <?php for ($i = 1; $i <= 10 ; $i++) 
-				echo "<a class='p-2 link-secondary text-decoration-none' href='#'>Thể loại</a>";
-            ?>
+            <?php foreach ($tl as $tl) { ?>
+				<a class='p-2 link-secondary text-decoration-none' href='#'><?php echo $tl["TenTheLoai"]?></a>
+            <?php }?>
 			</nav>
 	</div>
 	<div class="p-5 p-md-5 mb-4 text-white rounded bg-dark">
@@ -57,7 +57,27 @@
 					<p class="lead my-3">Mẫu</p>
 					<p class="lead mb-0"><a href="#" class="text-white fw-bold text-decoration-none">Đọc tiếp...</a></p>
 				</div>
-			</div>
+	</div>
+	<div class="row">
+			
+				<?php for ($i=0; $i<10 ; $i++) {?>
+					<div class="col-md-6">
+						<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+							<div class="col p-3 d-flex flex-column position-static">
+								<strong class="d-inline-block mb-2 text-primary">Tên truyện</strong>
+								<h4 class="mb-0">Thể loại</h4>
+								<div class="mb-1 text-muted">Ngày đăng</div>
+								<p class="card-text my-2">Tóm tắt</p>
+								<a href="/novel/chitiet/<%= tr._id %>" class="stretched-link text-decoration-none">Đọc tiếp...</a>
+							</div>
+							<div class="col-auto d-none d-lg-block">
+								<img src = "#" class="card-img-right" width="200">
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			
+	</div>
 	<?php include("include/bottom.php") ?>
 </body>
 </html>
