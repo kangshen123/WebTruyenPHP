@@ -13,7 +13,7 @@ else{
 
 switch($action){
     case "null":
-        $tl = $TheLoai->laytheloai(); 	
+        $tl = $TheLoai->laydulieu(); 	
         include("main.php");
         break;
     }
