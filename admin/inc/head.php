@@ -14,7 +14,11 @@
 			height: 3rem;
 			overflow-y: hidden;
 		}
-		
+		.fit-img {
+            width: 100px;
+            height: 50px;
+            object-fit: cover; /* Cắt ảnh để lấp đầy khung */
+        }
 		.nav-scroller .nav {
 			display: flex;
 			flex-wrap: nowrap;

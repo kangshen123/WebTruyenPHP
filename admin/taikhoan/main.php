@@ -11,10 +11,10 @@
 				<table class="table table-bordered table-hover table-sm mb-0">
 					<thead>
 						<tr>
-							<th width="5%">#</th>
+							<th width="5%">STT</th>
+							<th>Avatar</th>
 							<th>Họ và tên</th>
 							<th>Email</th>
-							<th>Hình ảnh</th>
 							<th>Tên đăng nhập</th>
 							<th>Quyền hạn</th>
 							<th>Trạng thái</th>
@@ -24,18 +24,28 @@
 					</thead>
 					<tbody>
 						<?php $id=0 ?>
-						<?php foreach ($tk as $tk) {?>
+						<?php foreach($tk as $tk) {?>
 							<tr>
-								<td><?php $id++ ?></td>
-								<td><?php $tk["HoTen"] ?></td>
-								<td><?php $tk["Email"] ?></td>
-								<td><?php $tk["HinhAnh"] ?></td>
-								<td><?php $tk["TenDangNhap"] ?></td>
-								<td><?php $tk["QuyenHan"] ?></td>
+								<td><?php echo $id++ ?></td>
+								<td><img class="fit-img" src="../../<?php echo $tk["HinhAnh"] ?>"></td>
+								<td><?php echo $tk["HoTen"] ?></td>
+								<td><?php echo $tk["Email"] ?></td>
+								<td><?php echo $tk["TenDangNhap"] ?></td>
+								<?php if ($tk["QuyenHan"] == 0){  ?>
+									<!-- Nội dung nếu quyền hạn bằng 0 -->
+									<td>	Người dùng</td>
+								<?php  }else { ?>
+									<!-- Nội dung nếu quyền hạn không bằng 0 -->
+									<td>	Quản trị viên</td>
+								<?php } ?>
 								<td class="text-center">
-									<td>Thêm nút</td>
+									<?php if($tk["KichHoat"] == 1) { ?>
+										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>"><i class="bi bi-check-circle"></i></a>
+									<?php } else { ?>
+										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>"><i class="bi bi-x-circle text-danger"></i></a>
+									<?php } ?>
 								</td>
-								<td class="text-center"><a href="#"><i class="bi bi-pencil-square"></i></a></td>
+								<td class="text-center"><a href="index.php?action=sua&id=<?php echo $tk["id"]?>"><i class="bi bi-pencil-square"></i></a></td>
 								<td class="text-center"><a href="index.php?action=xoa&id=<?php echo $tk["id"]?>" onclick="return confirm('Bạn có muốn xóa chủ đề <?php echo $tk['HoTen']?> không?');"><i class="bi bi-trash text-danger"></i></a></td>
 							</tr>
 						<?php } ?>
@@ -48,5 +58,4 @@
 	
 	<?php include("../inc/bottom.php") ?>
 </body>
-
 </html>

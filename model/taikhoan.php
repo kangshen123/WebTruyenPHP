@@ -108,15 +108,30 @@ class TAIKHOAN{
     // Cập nhật 
     public function sua($taikhoan){
         $dbcon = DATABASE::connect();
+        $kichhoat=1;
         try{
-            $sql = "UPDATE taikhoan SET HoTen=:tentaikhoan WHERE id=:id";
+            $sql = "UPDATE taikhoan SET HoTen=:hoten,
+                                        Email=:email,
+                                        HinhAnh=:hinhanh,
+                                        TenDangNhap=:tendangnhap,
+                                        MatKhau=:matkhau,
+                                        quyenhan=:quyenhan,
+                                        KichHoat=:kichhoat
+                                        WHERE id=:id";
             $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tentaikhoan", $taikhoan->hoten);
+            $cmd->bindValue(":hoten", $taikhoan->hoten);
+            $cmd->bindValue(":email", $taikhoan->email);
+            $cmd->bindValue(":hinhanh", $taikhoan->hinhanh);
+            $cmd->bindValue(":tendangnhap", $taikhoan->tendangnhap);
+            $cmd->bindValue(":matkhau", $taikhoan->matkhau);
+            $cmd->bindValue(":quyenhan", $taikhoan->quyenhan);
             $cmd->bindValue(":id", $taikhoan->id);
-            $result = $cmd->execute();
+            $cmd->bindValue(":kichhoat", $kichhoat);
+            $result = $cmd->execute();   
+            //print_r($cmd->debugDumpParams());         
             return $result;
         }
-            catch(PDOException $e){
+        catch(PDOException $e){
             $error_message = $e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
