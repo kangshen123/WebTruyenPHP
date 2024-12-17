@@ -1,19 +1,19 @@
 <?php
-class THELOAI{
+class TACGIA{
     // khai báo các thuộc tính
     private $id;
-    private $tentheloai;
+    private $tentacgia;
 
     public function getid(){ return $this->id; }
     public function setid($value){ $this->id = $value; }
-    public function gettentheloai(){ return $this->tentheloai; }
-    public function settentheloai($value){ $this->tentheloai = $value; }
+    public function gettentacgia(){ return $this->tentacgia; }
+    public function settentacgia($value){ $this->tentacgia = $value; }
 
     // Lấy danh sách thể loại
     public function laydulieu(){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "SELECT * FROM theloai";
+            $sql = "SELECT * FROM tacgia";
             $cmd = $dbcon->prepare($sql);
             $cmd->execute();
             $result = $cmd->fetchAll();
@@ -29,7 +29,7 @@ class THELOAI{
     public function laydulieutheoid($id){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "SELECT * FROM theloai WHERE id=:id";
+            $sql = "SELECT * FROM tacgia WHERE id=:id";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(":id", $id);
             $cmd->execute();
@@ -43,12 +43,12 @@ class THELOAI{
         }
     }
     // Thêm mới
-    public function them($theloai){
+    public function them($tacgia){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "INSERT INTO theloai(TenTheLoai) VALUES(:tentheloai)";
+            $sql = "INSERT INTO tacgia(TenTacGia) VALUES(:tentacgia)";
             $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tentheloai", $theloai->tentheloai);
+            $cmd->bindValue(":tentacgia", $tacgia->tentacgia);
             $result = $cmd->execute();
             return $result;
         }
@@ -59,12 +59,12 @@ class THELOAI{
         }
     }
     // Xóa 
-    public function xoa($theloai){
+    public function xoa($tacgia){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "DELETE FROM theloai WHERE id=:id";
+            $sql = "DELETE FROM tacgia WHERE id=:id";
             $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":id", $theloai->id);
+            $cmd->bindValue(":id", $tacgia->id);
             $result = $cmd->execute();
             return $result;
         }
@@ -75,13 +75,13 @@ class THELOAI{
         }
     }
     // Cập nhật 
-    public function sua($theloai){
+    public function sua($tacgia){
         $dbcon = DATABASE::connect();
         try{
-            $sql = "UPDATE theloai SET TenTheLoai=:tentheloai WHERE id=:id";
+            $sql = "UPDATE tacgia SET TenTacGia=:tentacgia WHERE id=:id";
             $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tentheloai", $theloai->tentheloai);
-            $cmd->bindValue(":id", $theloai->id);
+            $cmd->bindValue(":tentacgia", $tacgia->tentacgia);
+            $cmd->bindValue(":id", $tacgia->id);
             $result = $cmd->execute();
             return $result;
         }
