@@ -25,7 +25,7 @@
 		<?php include("../inc/top.php") ?>
 		
 		<div class="card mt-3">
-			<div class="card-header">Sửa thể loại<i></i></div>
+			<div class="card-header">Sửa tác giả<i></i></div>
 			<div class="card-body">
 				<form action="index.php?action=capnhat&id=<?php echo $tg['id']?>" method="post" class="needs-validation" novalidate>
 					<div class="mb-3">

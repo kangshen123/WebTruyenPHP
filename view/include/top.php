@@ -31,9 +31,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../admin/taikhoan/index.php?action=dangki">Đăng kí</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
 				<?php } else { ?>
 					<?php if($_SESSION['nguoidung']["QuyenHan"] == 1) { ?>
 						<li class="nav-item dropdown">
