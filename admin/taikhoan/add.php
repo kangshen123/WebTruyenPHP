@@ -77,7 +77,12 @@
 						<label for="MatKhau" class="form-label">Mật khẩu</label>
 						<input type="password" class="form-control" id="MatKhau" value=<?php echo $tk["MatKhau"]?> name="MatKhau" required />
 					</div>
-					<button type="submit" class="btn btn-primary"><i class="bi bi-cloud-arrow-up"></i> Sửa tài khoản</button>
+					<label for="role">Chọn quyền:</label>
+					<select name="role" class="form-control" id="role">
+						<option value="0">Người dùng</option>
+						<option value="1">Quản trị viên</option>
+					</select>
+					<button type="submit"  class="btn btn-primary"> <i class="bi bi-cloud-arrow-up"></i> Sửa tài khoản</button>
 				</form>
 			</div>
 		</div>

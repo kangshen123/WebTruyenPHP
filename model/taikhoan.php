@@ -137,6 +137,78 @@ class TAIKHOAN{
             exit();
         }
     }
+    //Duyệt
+    public function duyet($taikhoan){
+        $dbcon = DATABASE::connect();
+        try{
+            $sql = "UPDATE taikhoan SET KichHoat=:kichhoat WHERE id=:id";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":kichhoat", $taikhoan->kichhoat);
+            $cmd->bindValue(":id", $taikhoan->id);
+            $result = $cmd->execute();
+            return $result;
+        }
+            catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+
+    }
+    // khai báo các thuộc tính (SV tự viết)
+	public function kiemtranguoidunghople($tendn,$matkhau){
+		$db = DATABASE::connect();
+		try{
+			$sql = "SELECT * FROM taikhoan WHERE TenDangNhap=:tendangnhap AND MatKhau=:matkhau AND KichHoat=1";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(":tendangnhap", $tendn);
+            $cmd->bindValue(":matkhau", $matkhau);
+			$cmd->execute();
+			$valid = ($cmd->rowCount () == 1);
+			$cmd->closeCursor();
+			return $valid;			
+		}
+		catch(PDOException $e){
+			$error_message=$e->getMessage();
+			echo "<p>Lỗi truy vấn: $error_message</p>";
+			exit();
+		}
+	}
+    public function kiemtrathongtintaikhoan($tendn){
+        $db = DATABASE::connect();
+		try{
+			$sql = "SELECT * FROM taikhoan WHERE TenDangNhap=:tendangnhap";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(":tendangnhap", $tendn);
+			$cmd->execute();
+			$valid = ($cmd->rowCount () == 1);
+			$cmd->closeCursor();
+			return $valid;			
+		}
+		catch(PDOException $e){
+			$error_message=$e->getMessage();
+			echo "<p>Lỗi truy vấn: $error_message</p>";
+			exit();
+		}
+    }
+    // lấy thông tin người dùng có $email
+	public function laythongtinnguoidung($tendn){
+		$db = DATABASE::connect();
+		try{
+			$sql = "SELECT * FROM taikhoan WHERE TenDangNhap=:tendangnhap";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(":tendangnhap", $tendn);
+			$cmd->execute();
+			$ketqua = $cmd->fetch();
+			$cmd->closeCursor();
+			return $ketqua;
+		}
+		catch(PDOException $e){
+			$error_message=$e->getMessage();
+			echo "<p>Lỗi truy vấn: $error_message</p>";
+			exit();
+		}
+	}
 
 }
 ?>

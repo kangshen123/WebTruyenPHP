@@ -1,17 +1,19 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../../public/css/navbar.css">
     <title>MoiTruyen</title>
 </head>
 <body>
     <!-- Thanh điều hướng sẽ được thêm ở đây -->
         <nav class="navbar navbar-expand-lg navbar-dark navcolor">
     <a class="navbar-brand" href="/">
-        <img src="../img/superheroe-svgrepo-com.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top" />
+        <img src="../../public/img/superheroe-svgrepo-com.svg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top" />
         MoiNovel
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,26 +25,32 @@
         <li class="nav-item">
             <a class="nav-link"  href="#"><i class="bi bi-compass"></i> Top Tuần</a>
         </li>
-        <!--<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>-->
-        <li class="nav-item">
-            <a class="nav-link" href="#">Đăng nhập</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Đăng kí</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        <?php if(!isset($_SESSION['nguoidung'])) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../taikhoan/index.php?action=dangnhap">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../taikhoan/index.php?action=dangki">Đăng kí</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+				<?php } else { ?>
+					<?php if($_SESSION['nguoidung']["QuyenHan"] == 1) { ?>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-gear"></i> Quản lý
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/theloai"><i class="bi bi-card-checklist"></i> Thể loại</a></li>
+								<li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Tài khoản</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="/novel"><i class="bi bi-file-earmark-richtext"></i>Truyện</a></li>
+								<li><a class="dropdown-item" href="/chuong"><i class="bi bi-file-earmark-richtext"></i> Chương</a></li>
+							</ul>
+						</li>
+			        <?php } ?>
+                <?php } ?>
         </ul>
         <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -27,7 +27,7 @@ switch($action){
         $TacGia->them($tgmoi);
         // load danh sách
         $tg = $TacGia->laydulieu();       
-        include("main.php");
+        Header("Location:index.php?action=null");
         break; 
     case "xoa":
         // lấy dòng muốn xóa

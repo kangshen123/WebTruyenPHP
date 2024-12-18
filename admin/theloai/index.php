@@ -27,7 +27,7 @@ switch($action){
         $TheLoai->them($tlmoi);
         // load danh sách
         $tl = $TheLoai->laydulieu();       
-        include("main.php");
+        Header("Location:index.php?action=null");
         break; 
     case "xoa":
         // lấy dòng muốn xóa

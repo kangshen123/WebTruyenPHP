@@ -1,7 +1,10 @@
 <?php 
 require("../../model/database.php");
 require("../../model/taikhoan.php");
+require("../../model/theloai.php");
+require("../../model/truyen.php");
 $TaiKhoan = new TAIKHOAN();
+$TheLoai = new THELOAI();
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -20,7 +23,11 @@ switch($action){
         break;
     case "xulythem":
         //Xu ly pass
-        $password = password_hash($_POST['MatKhau'], PASSWORD_DEFAULT);
+        if ($_POST["MatKhau"] != $_POST["XacNhanMatKhau"]){       
+            include("error.php");
+            break; 
+        } 
+        $password = md5($_POST["MatKhau"]);
         //Xu ly hinh anh:
         $hinhanh = "images/Avatar/" . basename($_FILES["HinhAnh"]["name"]); // đường dẫn ảnh lưu trong db
 		$duongdan = "../../" . $hinhanh; // nơi lưu file upload (đường dẫn tính theo vị trí hiện hành)
@@ -37,7 +44,7 @@ switch($action){
         $TaiKhoan->them($tkmoi);
         // load danh sách
         $tk = $TaiKhoan->laydulieu();       
-        include("main.php");
+        Header("Location:index.php?action=null");
         break; 
     case "sua":
         $tk = $TaiKhoan->laydulieutheoid($_GET["id"]);
@@ -45,7 +52,7 @@ switch($action){
         break;
     case "capnhat":
         //Xu ly pass
-        $password = password_hash($_POST['MatKhau'], PASSWORD_DEFAULT);
+        $password = md5($_POST["MatKhau"]);
         //Xu ly hinh anh:
         $hinhanh = "images/Avatar/" . basename($_FILES["HinhAnh"]["name"]); // đường dẫn ảnh lưu trong db
 		$duongdan = "../../" . $hinhanh; // nơi lưu file upload (đường dẫn tính theo vị trí hiện hành)
@@ -58,7 +65,7 @@ switch($action){
         $tkmoi->sethinhanh($hinhanh);
         $tkmoi->settendangnhap($_POST["TenDangNhap"]);
         $tkmoi->setmatkhau($password);
-        $tkmoi->setquyenhan(0);
+        $tkmoi->setquyenhan($_POST["role"]);
     	// sửa
     	$TaiKhoan->sua($tkmoi);
     	// load danh sách
@@ -73,6 +80,40 @@ switch($action){
         }	
         $tk = $TaiKhoan->laydulieu();       
         include("main.php");
+        break;
+    case "duyet":
+        $tkkh = new TAIKHOAN();
+        $tt = $_GET["tt"];
+        $tkkh->setid($_GET["id"]);
+        if ($tt == 1){
+            $tkkh->setkichhoat(0);
+        } else {
+            $tkkh->setkichhoat(1);
+        }
+        $TaiKhoan->duyet($tkkh);
+        $tk = $TaiKhoan->laydulieu();       
+        include("main.php");
+    case "dangki":
+        include("dangki.php");
+        break;
+    case "dangnhap":
+        $error="";
+        include("dangnhap.php");
+        break;
+    case "xulydangnhap":
+        $tendn = $_POST["TenDangNhap"];
+        $password = md5($_POST["MatKhau"]);
+        if($TaiKhoan->kiemtranguoidunghople($tendn,$password)==TRUE){
+            $_SESSION["nguoidung"] = $TaiKhoan->laythongtinnguoidung($tendn); // đặt biến session
+            $tl = $TheLoai->laydulieu(); 
+            $error = "";
+            $action="null";
+            header ("Location:../../view/index.php");
+        }
+        else{
+            $error = "Tài khoản hoặc mật khẩu không chính xác";
+            include("dangnhap.php");
+        }
         break;
     default:
         break;

@@ -40,9 +40,9 @@
 								<?php } ?>
 								<td class="text-center">
 									<?php if($tk["KichHoat"] == 1) { ?>
-										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>"><i class="bi bi-check-circle"></i></a>
+										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>&tt=<?php echo $tk["KichHoat"] ?>"><i class="bi bi-check-circle"></i></a>
 									<?php } else { ?>
-										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>"><i class="bi bi-x-circle text-danger"></i></a>
+										<a href="index.php?action=duyet&id=<?php echo $tk["id"] ?>&tt=<?php echo $tk["KichHoat"] ?>"><i class="bi bi-x-circle text-danger"></i></a>
 									<?php } ?>
 								</td>
 								<td class="text-center"><a href="index.php?action=sua&id=<?php echo $tk["id"]?>"><i class="bi bi-pencil-square"></i></a></td>
