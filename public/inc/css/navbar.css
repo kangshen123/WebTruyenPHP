@@ -1,0 +1,8 @@
+.navcolor{
+	--bs-bg-opacity: 1;
+    background-color: #808080!important;
+}
+.icon{
+    width: 15px;
+    height: 18px;
+}

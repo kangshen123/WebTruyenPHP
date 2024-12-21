@@ -1,8 +1,8 @@
-<?php include("../inc/head.php")?>
+<?php include("../../public/inc/head.php")?>
 <?php $id=0?>
 <body>
 	<div class="container">
-    	<?php include("../inc/top.php")?>
+    	<?php include("../../public/inc/top.php")?>
 		<div class="card mt-3">
 			<div class="card-header">Thể loại</div>
 			<div class="card-body table-responsive">
@@ -32,7 +32,7 @@
 			</div>
 		</div>	
 	</div>
-	<?php include("../inc/bottom.php") ?>
+	<?php include("../../public/inc/bottom.php")?>
 </body>
 
 </html>

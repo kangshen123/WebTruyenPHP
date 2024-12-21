@@ -1,8 +1,8 @@
-<?php include("include/head.php")?>
+<?php include("../public/inc/head.php")?>
 <?php $randomNumber = mt_rand(1, 8); ?>
 <body>
 	<div class="container">
-    <?php include("include/top.php")?>
+    <?php include("../public/inc/top.php")?>
     <div class="nav-scroller py-1 mb-2">
 			<nav class="nav d-flex justify-content-between">
             <?php foreach ($tl as $tl) { ?>
@@ -36,7 +36,7 @@
 				<?php } ?>
 			
 		</div>
-		<?php include("include/bottom.php") ?>
+		<?php include("../public/inc/bottom.php")?>
 	</div>
 	
 </body>

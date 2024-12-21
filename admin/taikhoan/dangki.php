@@ -1,9 +1,9 @@
-<?php include("../inc/head.php")?>
+<?php include("../../public/inc/head.php")?>
 
 
 <body>
 	<div class="container">
-	<?php include("../inc/top.php")?>
+	<?php include("../../public/inc/top.php")?>
 		
 		<div class="card mt-3">
 			<div class="card-header">Đăng kí tài khoản</div>
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 	</div>
-	<?php include("../inc/bottom.php") ?>
+	<?php include("../../public/inc/bottom.php")?>
 </body>
 
 </html>

@@ -93,6 +93,7 @@ switch($action){
         $TaiKhoan->duyet($tkkh);
         $tk = $TaiKhoan->laydulieu();       
         include("main.php");
+        break;
     case "dangki":
         include("dangki.php");
         break;

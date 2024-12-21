@@ -1,11 +1,11 @@
-<?php include("../inc/head.php")?>
+<?php include("../../public/inc/head.php")?>
 <body>
     <?php 
 		$action = $_REQUEST["action"];
 	?>
     <?php if ($action == "them"){?>
 	<div class="container">
-    <?php include("../inc/top.php")?>
+	<?php include("../../public/inc/top.php")?>
 		<div class="card mt-3">
 			<div class="card-header">Thêm tài khoản</div>
 			<div class="card-body">
@@ -48,7 +48,7 @@
 	</div>
     <?php } else { ?>
         <div class="container">
-    <?php include("../inc/top.php")?>
+		<?php include("../../public/inc/top.php")?>
 		<div class="card mt-3">
 			<div class="card-header">Cập nhật tài khoản</div>
 			<div class="card-body">
@@ -89,7 +89,7 @@
 		
 	</div>
     <?php }?>
-	<?php include("../inc/bottom.php") ?>
+	<?php include("../../public/inc/bottom.php")?>
 </body>
 
 </html>
