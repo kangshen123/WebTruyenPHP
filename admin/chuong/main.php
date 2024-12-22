@@ -32,13 +32,23 @@
 								<td class="align-middle small"><?php echo $tr["TieuDe"] ?></td>
 								<td class="align-middle small"><?php echo $ch["TieuDe"] ?></td>
 								<td class="align-middle small"><?php echo $ch["NgayDang"] ?></td>
-								<td class="align-middle text-center">
-									<?php if($ch["KiemDuyet"] == 1) {?>
-										<a href="index.php?action=duyet&id=<?php echo $ch["id"]?>&tt=<?php echo $ch["KiemDuyet"] ?>"><i class="bi bi-check-circle"></i></a>
-									<?php } else { ?>
-										<a href="index.php?action=duyet&id=<?php echo $ch["id"]?>&tt=<?php echo $ch["KiemDuyet"] ?>"><i class="bi bi-x-circle text-danger"></i></a>
-									<?php } ?>
-								</td>
+								<?php if ($_SESSION["nguoidung"]["QuyenHan"]==1){?>
+									<td class="align-middle text-center">
+										<?php if($ch["KiemDuyet"] == 1) { ?>
+											<a href="index.php?action=duyet&id=<?php echo $ch["id"]?>&tt=<?php echo $ch["KiemDuyet"] ?>"><i class="bi bi-check-circle"></i></a>
+										<?php } else { ?>
+											<a href="index.php?action=duyet&id=<?php echo $ch["id"]?>&tt=<?php echo $ch["KiemDuyet"] ?>"><i class="bi bi-x-circle text-danger"></i></a>
+										<?php } ?>
+									</td>
+								<?php	} else {?>
+									<td class="align-middle text-center">
+										<?php if($ch["KiemDuyet"] == 1) { ?>
+											<a href="#"><i class="bi bi-check-circle"></i></a>
+										<?php } else { ?>
+											<a href="#"><i class="bi bi-x-circle text-danger"></i></a>
+										<?php } ?>
+									</td>
+								<?php }?>
 								
 								<td class="align-middle text-center"><a href="index.php?action=sua&id=<?php echo $ch["id"]?>"><i class="bi bi-pencil-square"></i></a></td>
 								<td class="align-middle text-center"><a href="index.php?action=xoa&id=<?php echo $ch["id"]?>" onclick="return confirm('Bạn có muốn xóa bài viết <?php echo $ch['TieuDe'] ?> không?');"><i class="bi bi-trash text-danger"></i></a></td>

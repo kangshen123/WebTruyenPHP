@@ -5,7 +5,10 @@ require("../../model/tacgia.php");
 require("../../model/taikhoan.php");
 require("../../model/truyen.php");
 require("../../model/chuong.php");
-
+#
+error_reporting(E_ALL & ~E_NOTICE);  // Tắt chỉ lỗi 'Notice'
+ini_set('display_errors', 0);
+#
 $Truyen = new TRUYEN();
 $TheLoai = new THELOAI();
 $TacGia = new TACGIA();
@@ -22,10 +25,15 @@ switch($action){
         $ch = $Chuong->laydulieu(); 	
         include("main.php");
         break;
-    case "them":
-        $tr = $Truyen->laydulieu();
+    case "them": 
+        session_start();
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            $tr = $Truyen->laydulieu();
+        }else{
+            $tr = $Truyen->laydulieutheonguoidung($_SESSION["nguoidung"]["id"]);
+        }
         include("add.php");
-        break;
+        break;     
     case "xulythem":
         session_start();
         $ngayDang = date('Y-m-d');
@@ -43,7 +51,12 @@ switch($action){
         $tr = $Truyen->laydulieu(); 
         $tg = $TacGia->laydulieu();
         $tl= $TheLoai->laydulieu();	
-        Header("Location:index.php?action=null");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=chuongcuatoi&id=$id");
+        }
     case "xoa":
         $chx = $Chuong->laydulieutheoid($_GET["id"]);
         if(isset($_GET["id"])){
@@ -55,7 +68,12 @@ switch($action){
         $sc = $trsc["SoChuong"]-1;
         $Truyen->dieuchinhchuong($chx["idTruyen"],$sc);
         $ch = $Chuong->laydulieu();       
-        include("main.php");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=chuongcuatoi&id=$id");
+        }
         break;
     case "duyet":
         $chduyet = new CHUONG();
@@ -102,7 +120,12 @@ switch($action){
         $tr = $Truyen->laydulieu(); 
         $tg = $TacGia->laydulieu();
         $tl= $TheLoai->laydulieu();	
-        Header("Location:index.php?action=null");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=chuongcuatoi&id=$id");
+        }
         break;
     case "chitiet":
         $error="";
@@ -129,6 +152,10 @@ switch($action){
             Header("Location:index.php?action=chitiet&id=$id");
             break;
         }
+        break;
+    case "chuongcuatoi":
+        $ch = $Chuong->laydulieutheonguoidung($_GET["id"]);
+        include("main.php");
         break;
     default:
         break;

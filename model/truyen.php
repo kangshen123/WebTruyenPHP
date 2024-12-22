@@ -95,6 +95,23 @@ class TRUYEN{
             exit();
         }
     }
+    // Lấy thể loại theo người dùng
+    public function laydulieutheonguoidung($id){
+        $dbcon = DATABASE::connect();
+        try{
+            $sql = "SELECT * FROM truyen WHERE NguoiDang=:id";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            $result = $cmd->fetchAll();             
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
     // Thêm mới
     public function them($truyen){
         $dbcon = DATABASE::connect();

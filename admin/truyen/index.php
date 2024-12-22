@@ -56,7 +56,13 @@ switch($action){
         $tr = $Truyen->laydulieu(); 
         $tg = $TacGia->laydulieu();
         $tl= $TheLoai->laydulieu();	
-        Header("Location:index.php?action=null");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=truyencuatoi&id=$id");
+        }
+        
     case "xoa":
         if(isset($_GET["id"])){
             $trxoa = new TRUYEN();        
@@ -65,7 +71,12 @@ switch($action){
         }	
         $Chuong->xoatheoidtruyen($_GET["id"]);
         $tr = $Truyen->laydulieu();       
-       include("main.php");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=truyencuatoi&id=$id");
+        }
         break;
     case "duyet":
         $trduyet = new TRUYEN();
@@ -116,12 +127,21 @@ switch($action){
         $tr = $Truyen->laydulieu(); 
         $tg = $TacGia->laydulieu();
         $tl= $TheLoai->laydulieu();	
-        Header("Location:index.php?action=null");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=truyencuatoi&id=$id");
+        }
         break;
     case "chitiet":
         $tr = $Truyen->laydulieutheoid($_GET["id"]);
         $ch = $Chuong->laydulieutheoidtruyen($_GET["id"]);
         include("detail.php");
+        break;
+    case "truyencuatoi":
+        $tr = $Truyen->laydulieutheonguoidung($_GET["id"]);
+        include("main.php");
         break;
     default:
         break;

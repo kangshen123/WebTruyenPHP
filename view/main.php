@@ -24,20 +24,22 @@
 						 $tg = $TacGia->laydulieutheoid($tr['IdTacGia']);
 						 $tl = $TheLoai->laydulieutheoid($tr['TheLoai']);
 					?>
-					<div class="col-md-6">
-						<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-							<div class="col p-3 d-flex flex-column position-static">
-								<strong class="d-inline-block mb-2 text-primary"><?php echo $tl["TenTheLoai"]?></strong>
-								<h4 class="mb-0"><?php echo $tr["TieuDe"]?></h4>
-								<div class="mb-1 text-muted"><?php echo $tr["NgayDang"]?></div>
-								<p class="card-text my-2"><?php echo $tr["TomTat"]?></p>
-								<a href="../admin/truyen/index.php?action=chitiet&id=<?php echo $tr["ID"] ?>" class="stretched-link text-decoration-none">Đọc tiếp...</a>
-							</div>
-							<div class="col-auto d-none d-lg-block">
-								<img src = "../<?php echo $tr["HinhAnh"]?>" class="card-img-right" width="200">
+					<?php if ($tr["KiemDuyet"]==1){?>
+						<div class="col-md-6">
+							<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+								<div class="col p-3 d-flex flex-column position-static">
+									<strong class="d-inline-block mb-2 text-primary"><?php echo $tl["TenTheLoai"]?></strong>
+									<h4 class="mb-0"><?php echo $tr["TieuDe"]?></h4>
+									<div class="mb-1 text-muted"><?php echo $tr["NgayDang"]?></div>
+									<p class="card-text my-2"><?php echo $tr["TomTat"]?></p>
+									<a href="../admin/truyen/index.php?action=chitiet&id=<?php echo $tr["ID"] ?>" class="stretched-link text-decoration-none">Đọc tiếp...</a>
+								</div>
+								<div class="col-auto d-none d-lg-block">
+									<img src = "../<?php echo $tr["HinhAnh"]?>" class="card-img-right" width="200">
+								</div>
 							</div>
 						</div>
-					</div>
+					<?php }?>
 				<?php } ?>
 			
 		</div>

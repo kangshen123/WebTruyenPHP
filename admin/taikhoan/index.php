@@ -67,12 +67,21 @@ switch($action){
         $tkmoi->sethinhanh($hinhanh);
         $tkmoi->settendangnhap($_POST["TenDangNhap"]);
         $tkmoi->setmatkhau($password);
-        $tkmoi->setquyenhan($_POST["role"]);
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            $tkmoi->setquyenhan($_POST["role"]);
+        }else{
+            $tkmoi->setquyenhan(0);
+        }
     	// sửa
     	$TaiKhoan->sua($tkmoi);
-    	// load danh sách
-        $tk = $TaiKhoan->laydulieu();       
-        include("main.php");
+    	// load danh sách       
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            session_start();
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=profile&id=$id");
+        }
         break;
     case "xoa":
         if(isset($_GET["id"])){
@@ -80,8 +89,13 @@ switch($action){
             $tkxoa->setid($_GET["id"]);
 			$TaiKhoan->xoa($tkxoa);
         }	
-        $tk = $TaiKhoan->laydulieu();       
-        include("main.php");
+        if ($_SESSION["nguoidung"]["QuyenHan"]==1){
+            Header("Location:index.php?action=null");
+        }else{
+            session_start();
+            $id=$_SESSION['nguoidung']['id'];
+            Header("Location:index.php?action=dangxuat");
+        }
         break;
     case "duyet":
         $tkkh = new TAIKHOAN();
@@ -149,6 +163,10 @@ switch($action){
         //include("login.php");         // hiển thị trang login
         header ("Location:../../view/index.php");     // hoặc chuyển hướng ra bên ngoài (trang dành cho khách)
         break;  
+    case "profile":
+        $tk = $TaiKhoan->laydulieutheoid($_GET["id"]);
+        include("profile.php");
+        break;
     default:
         break;
     }  

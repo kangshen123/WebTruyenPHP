@@ -83,6 +83,23 @@ class CHUONG{
             exit();
         }
     }
+     // Lấy chương theo id nguoidung
+     public function laydulieutheonguoidung($id){
+        $dbcon = DATABASE::connect();
+        try{
+            $sql = "SELECT * FROM chuong WHERE NguoiDang=:id";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            $result = $cmd->fetchAll();             
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
     // Thêm mới
     public function them($chuong){
         $dbcon = DATABASE::connect();

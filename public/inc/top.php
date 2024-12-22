@@ -54,14 +54,14 @@
             <?php } else { ?>
                 <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-person"></i> <?php $_SESSION['nguoidung']["HoTen"] ?> 
+							<i class="bi bi-person"></i> <?php echo $_SESSION['nguoidung']["HoTen"] ?> 
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="/novel/them"><i class="bi bi-file-earmark-plus"></i> Đăng truyện</a></li>
-							<li><a class="dropdown-item" href="/novel/cuatoi"><i class="bi bi-journal-bookmark"></i> Truyện của tôi</a></li>
-							<li><a class="dropdown-item" href="/chuong/cuatoi"><i class="bi bi-journal-bookmark"></i> Chương truyện của tôi</a></li>
+							<li><a class="dropdown-item" href="../truyen/index.php?action=them"><i class="bi bi-file-earmark-plus"></i> Đăng truyện</a></li>
+							<li><a class="dropdown-item" href="../truyen/index.php?action=truyencuatoi&id=<?php echo $_SESSION["nguoidung"]["id"]?>"><i class="bi bi-journal-bookmark"></i> Truyện của tôi</a></li>
+							<li><a class="dropdown-item" href="../chuong/index.php?action=chuongcuatoi&id=<?php echo $_SESSION["nguoidung"]["id"]?>"><i class="bi bi-journal-bookmark"></i> Chương truyện của tôi</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="/taikhoan/hoso/<%= session.MaNguoiDung %> "><i class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
+							<li><a class="dropdown-item" href="../taikhoan/index.php?action=profile&id=<?php echo $_SESSION["nguoidung"]["id"]?> "><i class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
 						</ul>
 					</li>
                 <li class="nav-item">
