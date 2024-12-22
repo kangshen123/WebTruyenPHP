@@ -2,11 +2,11 @@
 <?php $randomNumber = mt_rand(1, 8); ?>
 <body>
 	<div class="container">
-    <?php include("../public/inc/top.php")?>
+    <?php include("include/top.php")?>
     <div class="nav-scroller py-1 mb-2">
 			<nav class="nav d-flex justify-content-between">
             <?php foreach ($tl as $tl) { ?>
-				<a class='p-2 link-secondary text-decoration-none' href='#'><?php echo $tl["TenTheLoai"]?></a>
+				<a class='p-2 link-secondary text-decoration-none' href='index.php?action=loc&id=<?php echo $tl["id"] ?>'><?php echo $tl["TenTheLoai"]?></a>
             <?php }?>
 			</nav>
 	</div>
@@ -18,18 +18,23 @@
 				</div>
 	</div>
 	<div class="row">
-				<?php for ($i=1; $i<=8 ; $i++) {?>
+				<?php foreach ($tr as $tr) {?>
+					<?php 
+						 $tk = $TaiKhoan->laydulieutheoid($tr['NguoiDang']);
+						 $tg = $TacGia->laydulieutheoid($tr['IdTacGia']);
+						 $tl = $TheLoai->laydulieutheoid($tr['TheLoai']);
+					?>
 					<div class="col-md-6">
 						<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 							<div class="col p-3 d-flex flex-column position-static">
-								<strong class="d-inline-block mb-2 text-primary">Tên truyện</strong>
-								<h4 class="mb-0">Thể loại</h4>
-								<div class="mb-1 text-muted">Ngày đăng</div>
-								<p class="card-text my-2">Tóm tắt</p>
-								<a href="/novel/chitiet/<%= tr._id %>" class="stretched-link text-decoration-none">Đọc tiếp...</a>
+								<strong class="d-inline-block mb-2 text-primary"><?php echo $tl["TenTheLoai"]?></strong>
+								<h4 class="mb-0"><?php echo $tr["TieuDe"]?></h4>
+								<div class="mb-1 text-muted"><?php echo $tr["NgayDang"]?></div>
+								<p class="card-text my-2"><?php echo $tr["TomTat"]?></p>
+								<a href="../admin/truyen/index.php?action=chitiet&id=<?php echo $tr["ID"] ?>" class="stretched-link text-decoration-none">Đọc tiếp...</a>
 							</div>
 							<div class="col-auto d-none d-lg-block">
-								<img src = "../public/img/<?php echo $i ?>.jpg" class="card-img-right" width="200">
+								<img src = "../<?php echo $tr["HinhAnh"]?>" class="card-img-right" width="200">
 							</div>
 						</div>
 					</div>

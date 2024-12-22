@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../../public/css/navbar.css">
     <title>MoiTruyen</title>
@@ -20,7 +21,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <a class="nav-link"  href="#"><i class="bi bi-compass"></i> Top Tuần</a>
         </li>
@@ -31,22 +32,43 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../admin/taikhoan/index.php?action=dangki">Đăng kí</a>
                     </li>
-				<?php } else { ?>
-					<?php if($_SESSION['nguoidung']["QuyenHan"] == 1) { ?>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-gear"></i> Quản lý
-							</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/theloai"><i class="bi bi-card-checklist"></i> Thể loại</a></li>
-								<li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Tài khoản</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="/novel"><i class="bi bi-file-earmark-richtext"></i>Truyện</a></li>
-								<li><a class="dropdown-item" href="/chuong"><i class="bi bi-file-earmark-richtext"></i> Chương</a></li>
-							</ul>
-						</li>
-			        <?php } ?>
-                <?php } ?>
+        <?php } else { ?>
+            <?php if($_SESSION['nguoidung']["QuyenHan"] == 1) { ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear"></i> Quản lý
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../admin/theloai/index.php"><i class="bi bi-card-checklist"></i> Thể loại</a></li>
+                        <li><a class="dropdown-item" href="../admin/tacgia/index.php"><i class="bi bi-card-checklist"></i> Tác giả</a></li>
+                        <li><a class="dropdown-item" href="../admin/taikhoan/index.php"><i class="bi bi-people"></i> Tài khoản</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../admin/truyen/index.php"><i class="bi bi-file-earmark-richtext"></i>Truyện</a></li>
+                        <li><a class="dropdown-item" href="../admin/chuong/index.php"><i class="bi bi-file-earmark-richtext"></i> Chương</a></li>
+                    </ul>
+                    <li class="nav-item">
+						<a class="nav-link" href="../admin/taikhoan/index.php?action=dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+			        </li>
+                </li>
+            <?php } else { ?>
+                <li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person"></i> <?php echo $_SESSION['nguoidung']["HoTen"] ?> 
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="/novel/them"><i class="bi bi-file-earmark-plus"></i> Đăng truyện</a></li>
+							<li><a class="dropdown-item" href="/novel/cuatoi"><i class="bi bi-journal-bookmark"></i> Truyện của tôi</a></li>
+							<li><a class="dropdown-item" href="/chuong/cuatoi"><i class="bi bi-journal-bookmark"></i> Chương truyện của tôi</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="/taikhoan/hoso/<%= session.MaNguoiDung %> "><i class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
+						</ul>
+					</li>
+                <li class="nav-item">
+						<a class="nav-link" href="../admin/taikhoan/index.php?action=dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+			    </li>
+            <?php } ?>
+           
+        <?php } ?>
         </ul>
         <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

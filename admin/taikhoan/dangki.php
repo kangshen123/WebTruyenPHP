@@ -8,7 +8,7 @@
 		<div class="card mt-3">
 			<div class="card-header">Đăng kí tài khoản</div>
 			<div class="card-body">
-				<form action="index.php?action=xulythem" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+				<form action="index.php?action=xulydangki" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
 					<div class="mb-3">
 						<label for="HoVaTen" class="form-label">Họ và tên</label>
 						<input type="text" class="form-control" id="HoVaTen" name="HoVaTen" required />

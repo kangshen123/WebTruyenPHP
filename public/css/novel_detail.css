@@ -1,0 +1,92 @@
+body {
+    background-color: antiquewhite;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .chapter-list {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .chapter-list a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .chapter-list:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .novel-content {
+    color: #333;
+    background-color:blanchedalmond;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    
+  }
+
+  .novel-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .novel-info-left {
+    flex: 1;
+  }
+
+  .novel-info-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .novel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .novel-genre, .novel-summary, .novel-chapters {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .novel-image {
+    margin-top:   10px;
+    text-align: right;
+    
+  }
+
+  .novel-image img {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .novel-chapters-list {
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+
+  .novel-chapters-list > div {
+    margin-right: 10px;
+  }

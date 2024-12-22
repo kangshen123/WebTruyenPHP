@@ -1,4 +1,6 @@
 <?php 
+// Biến $isLogin cho biết người dùng đăng nhập chưa
+$isLogin = isset($_SESSION["nguoidung"]);
 require("../../model/database.php");
 require("../../model/taikhoan.php");
 require("../../model/theloai.php");
@@ -105,6 +107,7 @@ switch($action){
         $tendn = $_POST["TenDangNhap"];
         $password = md5($_POST["MatKhau"]);
         if($TaiKhoan->kiemtranguoidunghople($tendn,$password)==TRUE){
+            session_start();
             $_SESSION["nguoidung"] = $TaiKhoan->laythongtinnguoidung($tendn); // đặt biến session
             $tl = $TheLoai->laydulieu(); 
             $error = "";
@@ -116,6 +119,36 @@ switch($action){
             include("dangnhap.php");
         }
         break;
+    case "xulydangki":
+        if ($_POST["MatKhau"] != $_POST["XacNhanMatKhau"]){       
+            include("error.php");
+            break; 
+        } 
+        $password = md5($_POST["MatKhau"]);
+        //Xu ly hinh anh:
+        $hinhanh = "images/Avatar/" . basename($_FILES["HinhAnh"]["name"]); // đường dẫn ảnh lưu trong db
+		$duongdan = "../../" . $hinhanh; // nơi lưu file upload (đường dẫn tính theo vị trí hiện hành)
+		move_uploaded_file($_FILES["HinhAnh"]["tmp_name"], $duongdan);
+        //Xu ly them:
+        $tkmoi = new TAIKHOAN();
+        $tkmoi->setten($_POST["HoVaTen"]);
+        $tkmoi->setemail($_POST["Email"]);
+        $tkmoi->sethinhanh($hinhanh);
+        $tkmoi->settendangnhap($_POST["TenDangNhap"]);
+        $tkmoi->setmatkhau($password);
+        $tkmoi->setquyenhan(0);
+        // thêm
+        $TaiKhoan->them($tkmoi);
+        // load danh sách
+        $tk = $TaiKhoan->laydulieu();       
+        header ("Location:../../view/index.php");
+        break; 
+    case "dangxuat":
+        session_start();
+        unset($_SESSION["nguoidung"]);  // hủy biến session
+        //include("login.php");         // hiển thị trang login
+        header ("Location:../../view/index.php");     // hoặc chuyển hướng ra bên ngoài (trang dành cho khách)
+        break;  
     default:
         break;
     }  

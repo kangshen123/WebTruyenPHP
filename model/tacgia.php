@@ -91,6 +91,53 @@ class TACGIA{
             exit();
         }
     }
-
+    // Kiem tra tac gia da ton tai chua
+    public function kiemtratontai($tentacgia) {
+        $dbcon = DATABASE::connect();
+        try {
+            // Truy vấn kiểm tra tên tác giả đã tồn tại hay chưa
+            $sql = "SELECT COUNT(*) FROM tacgia WHERE TenTacGia = :tentacgia";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":tentacgia", $tentacgia);
+            $cmd->execute();
+            
+            // Lấy kết quả trả về từ câu lệnh COUNT
+            $result = $cmd->fetchColumn();
+            
+            // Nếu kết quả lớn hơn 0, tức là tên tác giả đã tồn tại
+            return $result > 0;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }    
+    //Lấy tác giả bằng tên tác giả
+    public function laydulieutheoten($tentacgia) {
+        $dbcon = DATABASE::connect();
+        try {
+            // Truy vấn lấy tác giả theo tên
+            $sql = "SELECT * FROM tacgia WHERE TenTacGia = :tentacgia";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":tentacgia", $tentacgia);
+            $cmd->execute();
+            
+            // Kiểm tra nếu có tác giả tìm thấy
+            $result = $cmd->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result) {
+                // Trả về thông tin tác giả dưới dạng mảng
+                return $result;
+            } else {
+                // Nếu không tìm thấy tác giả, trả về false
+                return false;
+            }
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+    
 }
 ?>

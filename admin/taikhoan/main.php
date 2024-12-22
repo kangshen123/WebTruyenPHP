@@ -26,7 +26,7 @@
 						<?php $id=0 ?>
 						<?php foreach($tk as $tk) {?>
 							<tr>
-								<td><?php echo $id++ ?></td>
+								<td><?php echo $id = $id+1 ?></td>
 								<td><img class="fit-img" src="../../<?php echo $tk["HinhAnh"] ?>"></td>
 								<td><?php echo $tk["HoTen"] ?></td>
 								<td><?php echo $tk["Email"] ?></td>
